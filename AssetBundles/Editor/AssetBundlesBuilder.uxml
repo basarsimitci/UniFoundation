@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xmlns:upm="UnityEditor.PackageManager.UI"
+
+    xsi:noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd"
+    xsi:schemaLocation="UnityEngine.UIElements ../../../../../UIElementsSchema/UnityEngine.UIElements.xsd
+                        UnityEditor.UIElements ../../../../../UIElementsSchema/UnityEditor.UIElements.xsd
+                        UnityEditor.PackageManager.UI ../../../../../UIElementsSchema/UnityEditor.PackageManager.UI.xsd"
+>
+    <Box class="table" name="assetBundlesTable">
+        <VisualElement class="row title">
+            <Label class="column200" text="Asset Bundles"/>
+            <Label class="column100" text="Version"/>
+        </VisualElement>
+    </Box>
+    
+    <editor:EnumField type="UnityEditor.BuildTarget" name="platform" label="Platform" value="iOS" />
+    <TextField name="baseUri" class="input200" label="Base Uri" />
+</UXML>
