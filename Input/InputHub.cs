@@ -8,7 +8,7 @@ namespace UniFoundation.Input
         
         public string Name => "InputHub";
 
-        protected List<IInput> Inputs = new List<IInput>();
+        protected readonly List<IInput> Inputs = new List<IInput>();
 
         public virtual void RegisterInput(IInput input)
         {

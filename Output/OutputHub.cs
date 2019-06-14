@@ -8,7 +8,7 @@ namespace UniFoundation.Output
         
         public string Name => "OutputHub";
 
-        protected List<IOutput> Outputs = new List<IOutput>();
+        protected readonly List<IOutput> Outputs = new List<IOutput>();
 
         public virtual void RegisterOutput(IOutput output)
         {
