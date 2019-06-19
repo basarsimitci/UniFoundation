@@ -12,7 +12,10 @@ namespace UniFoundation.Input
 
         public virtual void RegisterInput(IInput input)
         {
-            Inputs.Add(input);
+            if (Inputs.Contains(input) == false)
+            {
+                Inputs.Add(input);
+            }
         }
     }
 }

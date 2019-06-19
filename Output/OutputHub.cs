@@ -12,7 +12,10 @@ namespace UniFoundation.Output
 
         public virtual void RegisterOutput(IOutput output)
         {
-            Outputs.Add(output);
+            if (Outputs.Contains(output) == false)
+            {
+                Outputs.Add(output);
+            }
         }
     }
 }
