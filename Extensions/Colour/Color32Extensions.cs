@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 
 namespace UniFoundation.Extensions.Colour
@@ -22,9 +23,9 @@ namespace UniFoundation.Extensions.Colour
                 ? hexString.Substring(3, 1)
                 : hexString.Substring(5, 2);
 
-            byte.TryParse(redString, out value.r);
-            byte.TryParse(greenString, out value.g);
-            byte.TryParse(blueString, out value.b);
+            byte.TryParse(redString, NumberStyles.HexNumber, null, out value.r);
+            byte.TryParse(greenString, NumberStyles.HexNumber, null, out value.g);
+            byte.TryParse(blueString, NumberStyles.HexNumber, null, out value.b);
         }
 
         public static string ToHexString(this Color32 value)
