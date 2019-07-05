@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace UniFoundation.Output
 {
@@ -16,6 +17,16 @@ namespace UniFoundation.Output
             {
                 Outputs.Add(output);
             }
+        }
+
+        public virtual void UnregisterOutput(IOutput output)
+        {
+            Outputs.Remove(output);
+        }
+
+        protected List<T> FindOutputsOfType<T>() where T : IOutput
+        {
+            return Outputs.FindAll(typeof(T).IsInstanceOfType).Cast<T>().ToList();
         }
     }
 }

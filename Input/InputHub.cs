@@ -17,5 +17,10 @@ namespace UniFoundation.Input
                 Inputs.Add(input);
             }
         }
+
+        public virtual void UnregisterInput(IInput input)
+        {
+            Inputs.Remove(input);
+        }
     }
 }
