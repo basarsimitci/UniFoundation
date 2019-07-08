@@ -51,6 +51,7 @@ namespace UniFoundation.Extensions.Types
             byte.TryParse(redString, NumberStyles.HexNumber, null, out colour.r);
             byte.TryParse(greenString, NumberStyles.HexNumber, null, out colour.g);
             byte.TryParse(blueString, NumberStyles.HexNumber, null, out colour.b);
+            colour.a = 0xff;
             
             return colour;
         }
