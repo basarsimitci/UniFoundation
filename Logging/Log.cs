@@ -20,15 +20,15 @@ namespace UniFoundation.Logging
                 switch (logLevel)
                 {
                     case LogLevel.Info:
-                        Debug.Log(log);
+                        Debug.Log($"{logCategory}: {log}");
                         break;
                     
                     case LogLevel.Warning:
-                        Debug.LogWarning(log);
+                        Debug.LogWarning($"{logCategory}: {log}");
                         break;
                     
                     case LogLevel.Error:
-                        Debug.LogError(log);
+                        Debug.LogError($"{logCategory}: {log}");
                         break;
                 }
             }
