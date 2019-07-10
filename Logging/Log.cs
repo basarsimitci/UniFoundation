@@ -7,6 +7,12 @@ namespace UniFoundation.Logging
     {
         private static readonly Dictionary<string, LogLevel> CategoryLogLevels = new Dictionary<string, LogLevel>();
 
+        public static void SetStackTraceLevels()
+        {
+            Application.SetStackTraceLogType(LogType.Warning, StackTraceLogType.None);
+            Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);
+        }
+        
         public static void SetCategoryLogLevel(string logCategory, LogLevel logLevel)
         {
             CategoryLogLevels[logCategory] = logLevel;
