@@ -1,4 +1,5 @@
 using System.IO;
+using UniRx.Async;
 using UnityEngine;
 
 namespace UniFoundation.Files
@@ -13,6 +14,11 @@ namespace UniFoundation.Files
         public static byte[] ReadBinary(string relativePath)
         {
             return FileIO.ReadBinary(GetAbsolutePath(relativePath));
+        }
+
+        public static UniTask<byte[]> ReadBinaryAsync(string relativePath)
+        {
+            return FileIO.ReadBinaryAsync(GetAbsolutePath(relativePath));
         }
 
         public static bool ReadBinary(string relativePath, long fileOffset, byte[] buffer, int bufferOffset, int numberOfBytes)

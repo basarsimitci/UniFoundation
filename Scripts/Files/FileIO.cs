@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using UniFoundation.Logging;
+using UniRx.Async;
 
 namespace UniFoundation.Files
 {
@@ -18,6 +19,31 @@ namespace UniFoundation.Files
 #else
                 return File.ReadAllBytes(absolutePath);
 #endif
+            }
+            catch (Exception e)
+            {
+                Log.Output(LogCategory, e.Message, LogLevel.Error);
+                return null;
+            }
+        }
+
+        public static async UniTask<byte[]> ReadBinaryAsync(string absolutePath)
+        {
+            try
+            {
+                int numberOfBytesRead;
+                byte[] buffer = new byte[10000000];
+                
+                using (FileStream fs = File.OpenRead(absolutePath))
+                {
+                    numberOfBytesRead = await fs.ReadAsync(buffer, 0, 10000000);
+                    fs.Close();
+                }
+                
+                byte[] bytesRead = new byte[numberOfBytesRead];
+                Buffer.BlockCopy(buffer, 0, bytesRead, 0, numberOfBytesRead);
+
+                return bytesRead;
             }
             catch (Exception e)
             {
