@@ -127,6 +127,7 @@ MonoBehaviour:
   closeButton: {fileID: 5744024730238728000}
   logCategories: []
   outputLogLevel: 0
+  startHidden: 0
 --- !u!1 &4262979934837160476
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +371,6 @@ GameObject:
   - component: {fileID: 5744024730238728003}
   - component: {fileID: 5744024730238728014}
   - component: {fileID: 5744024730238728000}
-  - component: {fileID: 5744024730238728015}
   m_Layer: 0
   m_Name: Close
   m_TagString: Untagged
@@ -451,19 +451,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &5744024730238728015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5744024730238728002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9797c301364c46bf974a49480bb3687a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyCode: 27
 --- !u!1 &5744024731879967381
 GameObject:
   m_ObjectHideFlags: 0
