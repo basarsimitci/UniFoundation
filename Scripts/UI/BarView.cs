@@ -50,6 +50,11 @@ namespace UniFoundation.UI
             {
                 valueText.gameObject.SetActive(showValueText);
             }
+
+            if (barImage != null)
+            {
+                barImage.color = barColour;
+            }
         }
     }
 }
