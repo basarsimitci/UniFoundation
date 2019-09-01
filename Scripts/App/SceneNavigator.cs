@@ -64,7 +64,7 @@ namespace UniFoundation.App
             string scenes = "";
             foreach (int scene in sceneStack)
             {
-                scenes = scene + " > " + scenes;
+                scenes = sceneRegistry?.GetSceneName(scene) + " > " + scenes;
             }
 
             if (scenes.Length > 3)
