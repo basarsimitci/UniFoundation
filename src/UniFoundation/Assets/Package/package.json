@@ -1,0 +1,10 @@
+{
+  "name": "com.joyfulworks.unifoundation",
+  "version": "0.8.0",
+  "displayName": "UniFoundation",
+  "description": "Common library for Unity applications.",
+  "unity": "2020.2",
+  "dependencies": {
+    "com.cysharp.unitask": "2.1.1"
+  }
+}

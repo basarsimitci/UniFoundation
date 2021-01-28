@@ -1,0 +1,10 @@
+{
+    "name": "JoyfulWorks.UniFoundation.Editor",
+    "rootNamespace": "JoyfulWorks.UniFoundation.Editor",
+   "references": [
+        "JoyfulWorks.UniFoundation"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ]
+}

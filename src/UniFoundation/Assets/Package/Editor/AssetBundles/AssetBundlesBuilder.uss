@@ -1,0 +1,49 @@
+#body {
+    padding: 10px;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.column100 {
+    width: 100px;
+}
+
+.column200 {
+    width: 200px;
+}
+
+.title {
+    font-size: 16px;
+    -unity-font-style: bold;
+}
+
+.listItem {
+    font-size: 12px;
+}
+
+.input200 {
+    width: 300px;
+}
+
+#assetBundlesTable {
+    padding: 10px;
+}
+
+#platform {
+    margin-top: 20px;
+    width: 300px;
+    height: 20px;
+}
+
+#buildButton {
+    margin-top: 20px;
+    align-self: center;
+    width: 200px;
+    height: 30px;
+}
