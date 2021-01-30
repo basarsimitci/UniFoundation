@@ -7,7 +7,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace JoyfulWorks.UniFoundation.Editor.Package.Editor.AssetBundles
+namespace JoyfulWorks.UniFoundation.Editor.AssetBundles
 {
     public class AssetBundlesBuilder : EditorWindow
     {
