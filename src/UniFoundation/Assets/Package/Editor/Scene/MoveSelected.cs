@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace JoyfulWorks.UniFoundation.Editor.Package.Editor
+namespace JoyfulWorks.UniFoundation.Editor.Package.Editor.Scene
 {
     public class MoveSelected : EditorWindow
     {
