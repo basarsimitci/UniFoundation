@@ -1,3 +1,4 @@
+using JoyfulWorks.UniFoundation.Editor.CodeGeneration.InputHub;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration
     [InitializeOnLoad]
     public class CodeGenerator
     {
-        private static readonly InputHubGenerator InputHubGenerator = new InputHubGenerator(Path.Combine(Application.dataPath, "Scripts", "App"));
+        private static readonly InputHubGenerator InputHubGenerator = new InputHubGenerator();
         
         static CodeGenerator()
         {
@@ -23,7 +24,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration
         {
             IReadOnlyCollection<Assembly> compiledAssemblies = GetCompiledAssemblies().ToList().AsReadOnly();
             
-            InputHubGenerator.Generate(compiledAssemblies);
+            InputHubGenerator.Generate(compiledAssemblies, Path.Combine(Application.dataPath, "Scripts/App"));
         }
 
         private static IEnumerable<Assembly> GetCompiledAssemblies()
