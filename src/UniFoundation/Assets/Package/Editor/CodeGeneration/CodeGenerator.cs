@@ -1,3 +1,4 @@
+using JoyfulWorks.UniFoundation.Editor.CodeGeneration.App;
 using JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.InputHub;
 using JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.OutputHub;
 using JoyfulWorks.UniFoundation.Input;
@@ -15,10 +16,21 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration
 {
     public class CodeGenerator
     {
+        [MenuItem("UniFoundation/Generate App Class")]
+        public static void GenerateAppClass()
+        {
+            const string targetFolder = "Scripts/App";
+
+            AppGenerator appGenerator = new AppGenerator(targetFolder);
+            SaveIfChanged(targetFolder, appGenerator.ClassName, appGenerator.Generate());
+            
+            AssetDatabase.Refresh();
+        }
+        
         [MenuItem("UniFoundation/Generate IO Hubs")]
         public static void GenerateIOHubs()
         {
-            string targetFolder = "Scripts/App";
+            const string targetFolder = "Scripts/App";
             IReadOnlyCollection<Assembly> assemblies = GetCompiledAssemblies();
             
             InputHubGenerator inputHubGenerator = new InputHubGenerator(targetFolder);
