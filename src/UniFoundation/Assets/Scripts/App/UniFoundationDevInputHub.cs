@@ -1,9 +1,11 @@
 using JoyfulWorks.UniFoundation.Input;
 using JoyfulWorks.UniFoundation.Logging;
 
-namespace UniFoundation.App
+namespace JoyfulWorks.UniFoundationDev.App
 {
-    public class UniFoundationInputHub : InputHub, Test.ISomeInput, Test.ISomeOtherInput
+    public class UniFoundationDevInputHub : InputHub,
+        JoyfulWorks.UniFoundationDev.Test.ISomeInput,
+        JoyfulWorks.UniFoundationDev.Test.ISomeOtherInput
     {
         public override void RegisterInput(IInput input)
         {
@@ -25,7 +27,7 @@ namespace UniFoundation.App
             }
         }
 
-        #region Test.ISomeInput
+        #region JoyfulWorks.UniFoundationDev.Test.ISomeInput
 
         public event System.Action SomethingHappened;
         public event System.Action<System.Int32> IntHappened;
@@ -42,7 +44,7 @@ namespace UniFoundation.App
 
         private void RegisterSomeInput(IInput input)
         {
-            if (input is Test.ISomeInput typedInput)
+            if (input is JoyfulWorks.UniFoundationDev.Test.ISomeInput typedInput)
             {
                 Log.Output(LogCategory, $"{input.Name} registered as ISomeInput");
                 typedInput.SomethingHappened += InvokeSomethingHappened;
@@ -52,7 +54,7 @@ namespace UniFoundation.App
 
         private void UnregisterSomeInput(IInput input)
         {
-            if (input is Test.ISomeInput typedInput)
+            if (input is JoyfulWorks.UniFoundationDev.Test.ISomeInput typedInput)
             {
                 Log.Output(LogCategory, $"{input.Name} unregistered as ISomeInput");
                 typedInput.SomethingHappened -= InvokeSomethingHappened;
@@ -62,20 +64,14 @@ namespace UniFoundation.App
 
         #endregion
 
-        #region Test.ISomeOtherInput
+        #region JoyfulWorks.UniFoundationDev.Test.ISomeOtherInput
 
         public event System.Action<System.Single> FloatHappened;
-        public event System.Action OtherThingHappened;
         public event System.Action<UnityEngine.Vector3> PositionChanged;
 
         private void InvokeFloatHappened(System.Single arg1)
         {
             FloatHappened?.Invoke(arg1);
-        }
-
-        private void InvokeOtherThingHappened()
-        {
-            OtherThingHappened?.Invoke();
         }
 
         private void InvokePositionChanged(UnityEngine.Vector3 arg1)
@@ -85,22 +81,20 @@ namespace UniFoundation.App
 
         private void RegisterSomeOtherInput(IInput input)
         {
-            if (input is Test.ISomeOtherInput typedInput)
+            if (input is JoyfulWorks.UniFoundationDev.Test.ISomeOtherInput typedInput)
             {
                 Log.Output(LogCategory, $"{input.Name} registered as ISomeOtherInput");
                 typedInput.FloatHappened += InvokeFloatHappened;
-                typedInput.OtherThingHappened += InvokeOtherThingHappened;
                 typedInput.PositionChanged += InvokePositionChanged;
             }
         }
 
         private void UnregisterSomeOtherInput(IInput input)
         {
-            if (input is Test.ISomeOtherInput typedInput)
+            if (input is JoyfulWorks.UniFoundationDev.Test.ISomeOtherInput typedInput)
             {
                 Log.Output(LogCategory, $"{input.Name} unregistered as ISomeOtherInput");
                 typedInput.FloatHappened -= InvokeFloatHappened;
-                typedInput.OtherThingHappened -= InvokeOtherThingHappened;
                 typedInput.PositionChanged -= InvokePositionChanged;
             }
         }

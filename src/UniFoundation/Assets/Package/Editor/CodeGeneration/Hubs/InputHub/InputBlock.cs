@@ -1,9 +1,9 @@
 using System;
 using System.Reflection;
 
-namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.InputHub
+namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.InputHub
 {
-    public class InputHubInputBlock
+    public class InputBlock
     {
         public readonly string Code;
 
@@ -33,7 +33,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.InputHub
             "\n" +
             "        #endregion\n";
 
-        public InputHubInputBlock(Type inputType)
+        public InputBlock(Type inputType)
         {
             string events = string.Empty;
             string invokeMethods = string.Empty;
@@ -42,7 +42,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.InputHub
             foreach (EventInfo eventInfo in inputType.GetEvents())
             {
                 events += new EventDeclarationBlock(eventInfo).Code;
-                invokeMethods += new InputEventInvokeBlock(eventInfo).Code + "\n";
+                invokeMethods += new EventInvokeBlock(eventInfo).Code + "\n";
                 subscriptions += new EventSubscriptionBlock(eventInfo.Name).Code;
                 unsubscriptions += new EventSubscriptionBlock(eventInfo.Name, false).Code;
             }

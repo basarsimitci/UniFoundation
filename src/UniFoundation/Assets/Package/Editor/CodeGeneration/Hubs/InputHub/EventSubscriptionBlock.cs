@@ -1,4 +1,4 @@
-namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.InputHub
+namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.InputHub
 {
     public class EventSubscriptionBlock
     {

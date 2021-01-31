@@ -1,9 +1,9 @@
 using System;
 using System.Reflection;
 
-namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.InputHub
+namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.InputHub
 {
-    public class InputEventInvokeBlock
+    public class EventInvokeBlock
     {
         public readonly string Code;
 
@@ -13,7 +13,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.InputHub
             "            [EventName]?.Invoke([EventArguments]);\n" +
             "        }\n";
 
-        public InputEventInvokeBlock(EventInfo eventInfo)
+        public EventInvokeBlock(EventInfo eventInfo)
         {
             if (eventInfo == null) throw new ArgumentNullException(nameof(eventInfo));
             
