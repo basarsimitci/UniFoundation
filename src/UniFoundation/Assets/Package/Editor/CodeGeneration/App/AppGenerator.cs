@@ -7,9 +7,9 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.App
         private const string Template =
             "namespace [Namespace]\n" +
             "{\n" +
-            "    public class [ClassName] : UniFoundation.App.App\n" +
+            "    public class [ClassName] : JoyfulWorks.UniFoundation.App.App\n" +
             "    {\n" +
-            "        public new static [ClassName] Instance => ([ClassName]) UniFoundation.App.App.Instance;\n" +
+            "        public new static [ClassName] Instance => ([ClassName]) JoyfulWorks.UniFoundation.App.App.Instance;\n" +
             "\n" +
             "        // Declare properties for your own services here.\n" +
             "        // For example;\n" +
