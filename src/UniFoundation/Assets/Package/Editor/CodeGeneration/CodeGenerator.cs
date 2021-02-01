@@ -19,7 +19,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration
         [MenuItem("UniFoundation/Generate App Class")]
         public static void GenerateAppClass()
         {
-            const string targetFolder = "Scripts/App";
+            string targetFolder = EditorEnvironment.EditorConfig.AppFolder;
 
             AppGenerator appGenerator = new AppGenerator(targetFolder);
             SaveIfChanged(targetFolder, appGenerator.ClassName, appGenerator.Generate());
@@ -30,7 +30,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration
         [MenuItem("UniFoundation/Generate IO Hubs")]
         public static void GenerateIOHubs()
         {
-            const string targetFolder = "Scripts/App";
+            string targetFolder = EditorEnvironment.EditorConfig.AppFolder;
             IReadOnlyCollection<Assembly> assemblies = GetCompiledAssemblies();
             
             InputHubGenerator inputHubGenerator = new InputHubGenerator(targetFolder);

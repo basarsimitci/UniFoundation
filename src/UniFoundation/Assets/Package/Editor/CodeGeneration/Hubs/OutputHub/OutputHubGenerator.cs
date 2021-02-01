@@ -17,7 +17,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.OutputHub
             "    }\n" +
             "}";
 
-        public OutputHubGenerator(string targetFolder) : base($"{Application.productName}OutputHub", targetFolder)
+        public OutputHubGenerator(string targetFolder) : base($"{EditorEnvironment.EditorConfig.ClassNamePrefix}OutputHub", targetFolder)
         {
         }
 

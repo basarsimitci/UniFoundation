@@ -23,7 +23,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.App
             "    }\n" +
             "}";
 
-        public AppGenerator(string targetFolder) : base($"{Application.productName}App", targetFolder)
+        public AppGenerator(string targetFolder) : base($"{EditorEnvironment.EditorConfig.ClassNamePrefix}App", targetFolder)
         {
         }
 

@@ -35,7 +35,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.InputHub
             "    }\n" +
             "}";
 
-        public InputHubGenerator(string targetFolder) : base($"{Application.productName}InputHub", targetFolder)
+        public InputHubGenerator(string targetFolder) : base($"{EditorEnvironment.EditorConfig.ClassNamePrefix}InputHub", targetFolder)
         {
         }
 
