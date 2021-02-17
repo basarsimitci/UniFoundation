@@ -5,9 +5,17 @@ using UnityEngine;
 
 namespace JoyfulWorks.UniFoundation.App
 {
-    public class AppEntry : MonoBehaviour
+    public class AppEntry : MonoBehaviour, IAppLifetimeInput
     {
         private App app;
+
+        public event Action AppLostFocus;
+        public event Action AppGainedFocus;
+        public event Action AppPaused;
+        public event Action AppResumed;
+        public event Action AppEnding;
+
+        public string Name => gameObject.name;
 
         private void Awake()
         {
@@ -19,6 +27,35 @@ namespace JoyfulWorks.UniFoundation.App
             app = Activator.CreateInstance(appType) as App;
             
             DontDestroyOnLoad(this);
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (hasFocus)
+            {
+                AppGainedFocus?.Invoke();
+            }
+            else
+            {
+                AppLostFocus?.Invoke();
+            }
+        }
+
+        private void OnApplicationPause(bool pauseStatus)
+        {
+            if (pauseStatus)
+            {
+                AppPaused?.Invoke();
+            }
+            else
+            {
+                AppResumed?.Invoke();
+            }
+        }
+
+        private void OnApplicationQuit()
+        {
+            AppEnding?.Invoke();
         }
     }
 }

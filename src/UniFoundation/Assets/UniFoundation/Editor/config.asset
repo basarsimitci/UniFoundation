@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75fe2a2fb7bd4ab793221562229e25c0, type: 3}
   m_Name: config
   m_EditorClassIdentifier: 
-  AppFolder: Test
-  ClassNamePrefix: Tst
+  AppFolder: Scripts/App
+  ClassNamePrefix: UniFoundationDev

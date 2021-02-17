@@ -10,6 +10,8 @@ namespace JoyfulWorks.UniFoundation.App
 {
     public class App
     {
+        protected const string LogCategory = "App";
+        
         public static App Instance { get; private set; }
         
         public IInputHub InputHub { get; private set; }
@@ -59,5 +61,5 @@ namespace JoyfulWorks.UniFoundation.App
                 OutputHub = Activator.CreateInstance(outputHubType) as IOutputHub;
             }
         }
-   }
+    }
 }

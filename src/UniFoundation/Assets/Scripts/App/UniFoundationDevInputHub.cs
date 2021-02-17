@@ -5,7 +5,8 @@ namespace JoyfulWorks.UniFoundationDev.App
 {
     public class UniFoundationDevInputHub : InputHub,
         JoyfulWorks.UniFoundationDev.Test.ISomeInput,
-        JoyfulWorks.UniFoundationDev.Test.ISomeOtherInput
+        JoyfulWorks.UniFoundationDev.Test.ISomeOtherInput,
+        JoyfulWorks.UniFoundation.App.IAppLifetimeInput
     {
         public override void RegisterInput(IInput input)
         {
@@ -14,6 +15,7 @@ namespace JoyfulWorks.UniFoundationDev.App
                 base.RegisterInput(input);
                 RegisterSomeInput(input);
                 RegisterSomeOtherInput(input);
+                RegisterAppLifetimeInput(input);
             }
         }
 
@@ -24,6 +26,7 @@ namespace JoyfulWorks.UniFoundationDev.App
                 base.UnregisterInput(input);
                 UnregisterSomeInput(input);
                 UnregisterSomeOtherInput(input);
+                UnregisterAppLifetimeInput(input);
             }
         }
 
@@ -96,6 +99,67 @@ namespace JoyfulWorks.UniFoundationDev.App
                 Log.Output(LogCategory, $"{input.Name} unregistered as ISomeOtherInput");
                 typedInput.FloatHappened -= InvokeFloatHappened;
                 typedInput.PositionChanged -= InvokePositionChanged;
+            }
+        }
+
+        #endregion
+
+        #region JoyfulWorks.UniFoundation.App.IAppLifetimeInput
+
+        public event System.Action AppLostFocus;
+        public event System.Action AppGainedFocus;
+        public event System.Action AppPaused;
+        public event System.Action AppResumed;
+        public event System.Action AppEnding;
+
+        private void InvokeAppLostFocus()
+        {
+            AppLostFocus?.Invoke();
+        }
+
+        private void InvokeAppGainedFocus()
+        {
+            AppGainedFocus?.Invoke();
+        }
+
+        private void InvokeAppPaused()
+        {
+            AppPaused?.Invoke();
+        }
+
+        private void InvokeAppResumed()
+        {
+            AppResumed?.Invoke();
+        }
+
+        private void InvokeAppEnding()
+        {
+            AppEnding?.Invoke();
+        }
+
+        private void RegisterAppLifetimeInput(IInput input)
+        {
+            if (input is JoyfulWorks.UniFoundation.App.IAppLifetimeInput typedInput)
+            {
+                Log.Output(LogCategory, $"{input.Name} registered as IAppLifetimeInput");
+                typedInput.AppLostFocus += InvokeAppLostFocus;
+                typedInput.AppGainedFocus += InvokeAppGainedFocus;
+                typedInput.AppPaused += InvokeAppPaused;
+                typedInput.AppResumed += InvokeAppResumed;
+                typedInput.AppEnding += InvokeAppEnding;
+            }
+        }
+
+        private void UnregisterAppLifetimeInput(IInput input)
+        {
+            if (input is JoyfulWorks.UniFoundation.App.IAppLifetimeInput typedInput)
+            {
+                Log.Output(LogCategory, $"{input.Name} unregistered as IAppLifetimeInput");
+                typedInput.AppLostFocus -= InvokeAppLostFocus;
+                typedInput.AppGainedFocus -= InvokeAppGainedFocus;
+                typedInput.AppPaused -= InvokeAppPaused;
+                typedInput.AppResumed -= InvokeAppResumed;
+                typedInput.AppEnding -= InvokeAppEnding;
             }
         }
 
