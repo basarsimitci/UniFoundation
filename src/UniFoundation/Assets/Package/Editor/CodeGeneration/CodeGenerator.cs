@@ -1,6 +1,7 @@
 using JoyfulWorks.UniFoundation.Editor.CodeGeneration.App;
 using JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.InputHub;
 using JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.OutputHub;
+using JoyfulWorks.UniFoundation.Editor.CodeGeneration.SceneEnum;
 using JoyfulWorks.UniFoundation.Input;
 using JoyfulWorks.UniFoundation.Output;
 using System;
@@ -22,7 +23,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration
             string targetFolder = EditorEnvironment.EditorConfig.AppFolder;
 
             AppGenerator appGenerator = new AppGenerator(targetFolder);
-            SaveIfChanged(targetFolder, appGenerator.ClassName, appGenerator.Generate());
+            SaveIfChanged(targetFolder, appGenerator.TypeName, appGenerator.Generate());
             
             AssetDatabase.Refresh();
         }
@@ -34,11 +35,22 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration
             IReadOnlyCollection<Assembly> assemblies = GetCompiledAssemblies();
             
             InputHubGenerator inputHubGenerator = new InputHubGenerator(targetFolder);
-            SaveIfChanged(targetFolder, inputHubGenerator.ClassName, inputHubGenerator.Generate(FindInterfaces<IInput>(assemblies))); 
+            SaveIfChanged(targetFolder, inputHubGenerator.TypeName, inputHubGenerator.Generate(FindInterfaces<IInput>(assemblies))); 
             
             OutputHubGenerator outputHubGenerator = new OutputHubGenerator(targetFolder);
-            SaveIfChanged(targetFolder, outputHubGenerator.ClassName, outputHubGenerator.Generate(FindInterfaces<IOutput>(assemblies))); 
+            SaveIfChanged(targetFolder, outputHubGenerator.TypeName, outputHubGenerator.Generate(FindInterfaces<IOutput>(assemblies))); 
 
+            AssetDatabase.Refresh();
+        }
+
+        [MenuItem("UniFoundation/Generate Scene Enum")]
+        public static void GenerateSceneEnum()
+        {
+            string targetFolder = EditorEnvironment.EditorConfig.AppFolder;
+
+            SceneEnumGenerator sceneEnumGenerator = new SceneEnumGenerator(targetFolder);
+            SaveIfChanged(targetFolder, sceneEnumGenerator.TypeName, sceneEnumGenerator.Generate());
+            
             AssetDatabase.Refresh();
         }
 
@@ -89,12 +101,12 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration
             return inputInterfaces;
         }
 
-        private static void SaveIfChanged(string targetFolder, string className, string generatedCode)
+        private static void SaveIfChanged(string targetFolder, string typeName, string generatedCode)
         {
             string targetFolderPath = Path.Combine(Application.dataPath, targetFolder);
             Directory.CreateDirectory(targetFolderPath);
             
-            string targetFilePath = Path.Combine(targetFolderPath, $"{className}.cs");
+            string targetFilePath = Path.Combine(targetFolderPath, $"{typeName}.cs");
             string currentFile = string.Empty;
             if (File.Exists(targetFilePath))
             {

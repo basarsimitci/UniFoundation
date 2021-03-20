@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs
 {
-    public abstract class HubGenerator : ClassGenerator
+    public abstract class HubGenerator : TypeGenerator
     {
-        protected HubGenerator(string className, string targetFolder) : base(className, targetFolder)
+        protected HubGenerator(string typeName, string targetFolder) : base(typeName, targetFolder)
         {
         }
 

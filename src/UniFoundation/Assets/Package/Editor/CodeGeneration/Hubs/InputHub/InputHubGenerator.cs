@@ -52,7 +52,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.InputHub
             
             return Template
                 .Replace("[Namespace]", Namespace)
-                .Replace("[ClassName]", ClassName)
+                .Replace("[ClassName]", TypeName)
                 .Replace(" [ImplementationList]", implementationList)
                 .Replace("[RegisterCalls]", registerCalls)
                 .Replace("[UnregisterCalls]", unregisterCalls)

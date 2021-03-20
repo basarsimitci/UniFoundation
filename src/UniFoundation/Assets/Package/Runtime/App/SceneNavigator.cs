@@ -1,58 +1,46 @@
-using Cysharp.Threading.Tasks;
 using JoyfulWorks.UniFoundation.Logging;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.SceneManagement;
 
 namespace JoyfulWorks.UniFoundation.App
 {
-    public class SceneNavigator : ISceneNavigator
+    internal class SceneNavigator : ISceneNavigator
     {
         public const string LogCategory = "SceneNavigator";
 
-        private readonly SceneRegistry sceneRegistry;
         private readonly Stack<int> sceneStack = new Stack<int>();
 
-        public SceneNavigator(SceneRegistry sceneRegistry)
+        public SceneNavigator()
         {
-            this.sceneRegistry = sceneRegistry;
+            sceneStack.Push(SceneManager.GetActiveScene().buildIndex);
         }
 
-        public async void GotoScene(int nextScene)
+        public void GotoScene(int nextScene)
         {
-            string nextSceneName = sceneRegistry?.GetSceneName(nextScene);
-            if (nextSceneName != null)
+            Log.Output(LogCategory, $"GotoScene {nextScene} start:");
+            LogSceneStack();
+
+            int currentScene = sceneStack.Count > 0 ? sceneStack.Peek() : -1;
+            if (currentScene != nextScene)
             {
-                Log.Output(LogCategory, $"GotoScene {nextSceneName} start:");
-                LogSceneStack();
-
-                int currentScene = sceneStack.Count > 0 ? sceneStack.Peek() : SceneRegistry.NullSceneId;
-                if (currentScene != nextScene)
-                {
-                    string currentSceneName = sceneRegistry.GetSceneName(currentScene);
-                    if (currentSceneName != null)
-                    {
-                        SceneManager.UnloadSceneAsync(currentSceneName);
-                    }
-
-                    await SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Additive);
-                    sceneStack.Push(nextScene);
-                }
-
-                Log.Output(LogCategory, $"GotoScene {nextSceneName} end:");
-                LogSceneStack();
+                SceneManager.LoadScene(nextScene);
+                sceneStack.Push(nextScene);
             }
+
+            Log.Output(LogCategory, $"GotoScene {nextScene} end:");
+            LogSceneStack();
         }
 
-        public async void GoBack()
+        public void GoBack()
         {
             Log.Output(LogCategory, "GoBack start:");
             LogSceneStack();
 
             if (sceneStack.Count > 1)
             {
-                int currentScene = sceneStack.Pop();
-                await SceneManager.UnloadSceneAsync(sceneRegistry.GetSceneName(currentScene));
-                await SceneManager.LoadSceneAsync(sceneRegistry.GetSceneName(sceneStack.Peek()), LoadSceneMode.Additive);
+                sceneStack.Pop();
+                SceneManager.LoadScene(sceneStack.Peek());
             }
             
             Log.Output(LogCategory, "GoBack end:");
@@ -61,11 +49,7 @@ namespace JoyfulWorks.UniFoundation.App
 
         private void LogSceneStack()
         {
-            string scenes = "";
-            foreach (int scene in sceneStack)
-            {
-                scenes = sceneRegistry?.GetSceneName(scene) + " > " + scenes;
-            }
+            string scenes = sceneStack.Aggregate("", (current, scene) => scene + " > " + current);
 
             if (scenes.Length > 3)
             {

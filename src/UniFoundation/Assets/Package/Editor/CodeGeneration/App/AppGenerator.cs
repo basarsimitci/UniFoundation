@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.App
 {
-    public class AppGenerator : ClassGenerator
+    public class AppGenerator : TypeGenerator
     {
         private const string Template =
             "namespace [Namespace]\n" +
@@ -31,7 +31,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.App
         {
             return Template
                 .Replace("[Namespace]", Namespace)
-                .Replace("[ClassName]", ClassName);
+                .Replace("[ClassName]", TypeName);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.Hubs.OutputHub
             
             return Template
                 .Replace("[Namespace]", Namespace)
-                .Replace("[ClassName]", ClassName)
+                .Replace("[ClassName]", TypeName)
                 .Replace(" [ImplementationList]", implementationList)
                 .Replace("[OutputBlocks]", outputBlocks);
         }

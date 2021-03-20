@@ -25,7 +25,8 @@ namespace JoyfulWorks.UniFoundation.App
             Type appType = appTypes.Count == 1 ? appTypes[0] : typeof(App);
 
             app = Activator.CreateInstance(appType) as App;
-            
+            app?.InputHub.RegisterInput(this);
+
             DontDestroyOnLoad(this);
         }
 

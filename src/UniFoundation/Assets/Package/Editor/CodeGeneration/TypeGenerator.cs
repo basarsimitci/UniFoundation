@@ -3,19 +3,19 @@ using UnityEditor.Compilation;
 
 namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration
 {
-    public abstract class ClassGenerator
+    public abstract class TypeGenerator
     {
         public readonly string Namespace;
-        public readonly string ClassName;
+        public readonly string TypeName;
 
-        protected ClassGenerator(string className, string targetFolder)
+        protected TypeGenerator(string typeName, string targetFolder)
         {
             Namespace = CompilationPipeline.GetAssemblies().First(asmdef => asmdef.name == "Assembly-CSharp").rootNamespace;
             Namespace = targetFolder.Split('/', '\\')
                 .Where(subfolder => subfolder != "Scripts")
                 .Aggregate(Namespace, (current, subfolder) => current + $".{subfolder}");
 
-            ClassName = className;
+            TypeName = typeName;
         }
     }
 }

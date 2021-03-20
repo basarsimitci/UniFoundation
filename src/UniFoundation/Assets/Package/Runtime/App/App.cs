@@ -16,6 +16,7 @@ namespace JoyfulWorks.UniFoundation.App
         
         public IInputHub InputHub { get; private set; }
         public IOutputHub OutputHub { get; private set; }
+        public ISceneNavigator SceneNavigator { get; private set; }
 
         public App()
         {
@@ -23,6 +24,7 @@ namespace JoyfulWorks.UniFoundation.App
 
             InitLogging();
             InitHubs();
+            InitSceneNavigator();
         }
 
         public static IEnumerable<Type> GetTypesInDefaultAssembly<T>()
@@ -60,6 +62,11 @@ namespace JoyfulWorks.UniFoundation.App
             {
                 OutputHub = Activator.CreateInstance(outputHubType) as IOutputHub;
             }
+        }
+
+        private void InitSceneNavigator()
+        {
+            SceneNavigator = new SceneNavigator();
         }
     }
 }
