@@ -33,6 +33,11 @@ namespace JoyfulWorks.UniFoundation.App
             return defaultAssembly.GetTypes().Where(type => typeof(T).IsAssignableFrom(type));
         }
 
+        public IEnumerable<Type> GetTypesInSameAssembly<T>()
+        {
+            return GetType().Assembly.GetTypes().Where(type => typeof(T).IsAssignableFrom(type));
+        }
+
         public T GetInput<T>() where T : IInput
         {
             return (T) InputHub;
@@ -51,13 +56,13 @@ namespace JoyfulWorks.UniFoundation.App
 
         private void InitHubs()
         {
-            Type inputHubType = GetTypesInDefaultAssembly<InputHub>().FirstOrDefault();
+            Type inputHubType = GetTypesInSameAssembly<InputHub>().FirstOrDefault();
             if (inputHubType != null)
             {
                 InputHub = Activator.CreateInstance(inputHubType) as IInputHub;
             }
             
-            Type outputHubType = GetTypesInDefaultAssembly<OutputHub>().FirstOrDefault();
+            Type outputHubType = GetTypesInSameAssembly<OutputHub>().FirstOrDefault();
             if (outputHubType != null)
             {
                 OutputHub = Activator.CreateInstance(outputHubType) as IOutputHub;
