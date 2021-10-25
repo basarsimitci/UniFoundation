@@ -21,9 +21,9 @@ namespace JoyfulWorks.UniFoundation.Files
             return FileIO.ReadBinaryAsync(GetAbsolutePath(relativePath));
         }
 
-        public static bool ReadBinary(string relativePath, long fileOffset, byte[] buffer, int bufferOffset, int numberOfBytes)
+        public static void ReadBinary(string relativePath, long fileOffset, byte[] buffer, int bufferOffset, int numberOfBytes)
         {
-            return FileIO.ReadBinary(GetAbsolutePath(relativePath), fileOffset, buffer, bufferOffset, numberOfBytes);
+            FileIO.ReadBinary(GetAbsolutePath(relativePath), fileOffset, buffer, bufferOffset, numberOfBytes);
         }
 
         public static void WriteBinary(string relativePath, byte[] data)
