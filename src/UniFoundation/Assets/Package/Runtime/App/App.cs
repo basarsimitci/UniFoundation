@@ -18,12 +18,18 @@ namespace JoyfulWorks.UniFoundation.App
         public IOutputHub OutputHub { get; private set; }
         public ISceneNavigator SceneNavigator { get; private set; }
 
-        public App()
+        public App(IAppLifetimeInput appLifetimeInput)
         {
             Instance = this;
 
             InitLogging();
+            
             InitHubs();
+            if (appLifetimeInput != null)
+            {
+                InputHub.RegisterInput(appLifetimeInput);
+            }
+
             InitSceneNavigator();
         }
 
@@ -36,6 +42,10 @@ namespace JoyfulWorks.UniFoundation.App
         public IEnumerable<Type> GetTypesInSameAssembly<T>()
         {
             return GetType().Assembly.GetTypes().Where(type => typeof(T).IsAssignableFrom(type));
+        }
+
+        public virtual void EndApp()
+        {
         }
 
         public T GetInput<T>() where T : IInput

@@ -24,8 +24,7 @@ namespace JoyfulWorks.UniFoundation.App
             // If App is not extended, or if there more than 1 type extending App, fall back to base App.
             Type appType = appTypes.Count == 1 ? appTypes[0] : typeof(App);
 
-            app = Activator.CreateInstance(appType) as App;
-            app?.InputHub.RegisterInput(this);
+            app = Activator.CreateInstance(appType, args: this) as App;
 
             DontDestroyOnLoad(this);
         }
@@ -57,6 +56,7 @@ namespace JoyfulWorks.UniFoundation.App
         private void OnApplicationQuit()
         {
             AppEnding?.Invoke();
+            app.EndApp();
         }
     }
 }
