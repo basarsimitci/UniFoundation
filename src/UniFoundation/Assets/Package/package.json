@@ -1,6 +1,6 @@
 {
   "name": "com.joyfulworks.unifoundation",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "displayName": "UniFoundation",
   "description": "Common library for Unity applications.",
   "unity": "2020.2",
