@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using JoyfulWorks.UniFoundation.Networking;
 using System.IO;
 using UnityEngine;
 
@@ -12,7 +14,18 @@ namespace JoyfulWorks.UniFoundation.Files
         
         public static byte[] ReadBinary(string relativePath)
         {
-            return FileIO.ReadBinary(GetAbsolutePath(relativePath));
+            string absolutePath = GetAbsolutePath(relativePath);
+            
+#if UNITY_ANDROID
+            UniTask<byte[]>.Awaiter downloadTaskAwaiter = Web.DownloadBinary(absolutePath).GetAwaiter();
+            while (downloadTaskAwaiter.IsCompleted == false)
+            {
+                // Wait for the task to complete.
+            }
+            return downloadTaskAwaiter.GetResult();
+#else
+            return FileIO.ReadBinary(absolutePath);
+#endif
         }
 
         public static void ReadBinary(string relativePath, long fileOffset, byte[] buffer, int bufferOffset, int numberOfBytes)
@@ -22,7 +35,18 @@ namespace JoyfulWorks.UniFoundation.Files
 
         public static string ReadText(string relativePath)
         {
-            return FileIO.ReadText(GetAbsolutePath(relativePath));
+            string absolutePath = GetAbsolutePath(relativePath);
+
+#if UNITY_ANDROID
+            UniTask<string>.Awaiter downloadTaskAwaiter = Web.DownloadText(absolutePath).GetAwaiter();
+            while (downloadTaskAwaiter.IsCompleted == false)
+            {
+                // Wait for the task to complete.
+            }
+            return downloadTaskAwaiter.GetResult();
+#else
+            return FileIO.ReadText(absolutePath);
+#endif
         }
     }
 }
