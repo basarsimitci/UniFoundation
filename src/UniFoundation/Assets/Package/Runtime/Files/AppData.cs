@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using JoyfulWorks.UniFoundation.Networking;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace JoyfulWorks.UniFoundation.Files
 {
@@ -38,13 +39,15 @@ namespace JoyfulWorks.UniFoundation.Files
             string absolutePath = GetAbsolutePath(relativePath);
 
 #if UNITY_ANDROID
-            UniTask<string>.Awaiter downloadTaskAwaiter = Web.DownloadText(absolutePath).GetAwaiter();
-            while (downloadTaskAwaiter.IsCompleted == false)
+            UnityWebRequest webRequest = UnityWebRequest.Get(absolutePath);
+            webRequest.SendWebRequest();
+            while (webRequest.downloadHandler.isDone == false)
             {
                 // Wait for the task to complete.
-                Debug.Log(absolutePath + ", Complete: " + downloadTaskAwaiter.IsCompleted);
+                Debug.Log(absolutePath + ", Complete: " + webRequest.downloadHandler.isDone);
             }
-            return downloadTaskAwaiter.GetResult();
+            
+            return webRequest.downloadHandler.text;
 #else
             return FileIO.ReadText(absolutePath);
 #endif
