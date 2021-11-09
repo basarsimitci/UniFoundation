@@ -42,7 +42,7 @@ namespace JoyfulWorks.UniFoundation.Files
             while (downloadTaskAwaiter.IsCompleted == false)
             {
                 // Wait for the task to complete.
-                Debug.Log(downloadTaskAwaiter.IsCompleted);
+                Debug.Log(absolutePath + ", Complete: " + downloadTaskAwaiter.IsCompleted);
             }
             return downloadTaskAwaiter.GetResult();
 #else
