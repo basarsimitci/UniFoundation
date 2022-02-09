@@ -1,10 +1,11 @@
 {
   "name": "com.joyfulworks.unifoundation",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "displayName": "UniFoundation",
   "description": "Common library for Unity applications.",
   "unity": "2020.2",
   "dependencies": {
-    "com.cysharp.unitask": "2.2.4"
+    "com.cysharp.unitask": "2.2.4",
+    "jillejr.newtonsoft.json-for-unity" : "13.0.102"
   }
 }
