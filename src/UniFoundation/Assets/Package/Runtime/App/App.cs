@@ -11,16 +11,19 @@ namespace JoyfulWorks.UniFoundation.App
     public class App
     {
         protected const string LogCategory = "App";
-        
+
+        private readonly ViewConfig viewConfig;
+
         public static App Instance { get; private set; }
         
         public IInputHub InputHub { get; private set; }
         public IOutputHub OutputHub { get; private set; }
         public ISceneNavigator SceneNavigator { get; private set; }
 
-        public App(IAppLifetimeInput appLifetimeInput)
+        public App(IAppLifetimeInput appLifetimeInput, ViewConfig viewConfig)
         {
             Instance = this;
+            this.viewConfig = viewConfig;
 
             InitLogging();
             
@@ -56,6 +59,11 @@ namespace JoyfulWorks.UniFoundation.App
         public T GetOutput<T>() where T : IOutput
         {
             return (T) OutputHub;
+        }
+
+        public T GetViewConfig<T>() where T : class
+        {
+            return viewConfig as T;
         }
         
         private void InitLogging()

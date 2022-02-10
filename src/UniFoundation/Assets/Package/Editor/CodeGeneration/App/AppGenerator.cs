@@ -15,7 +15,7 @@ namespace JoyfulWorks.UniFoundation.Editor.CodeGeneration.App
             "        // For example;\n" +
             "        //public ISomeService SomeService { get; }\n" + 
             "\n" +
-            "        public [ClassName](IAppLifetimeInput appLifetimeInput) : base(appLifetimeInput)\n" +
+            "        public [ClassName](IAppLifetimeInput appLifetimeInput, ViewConfig viewConfig) : base(appLifetimeInput, viewConfig)\n" +
             "        {\n" +
             "            // Instantiate your own services here.\n" +
             "            // SomeService = new ConcreteSomeService();\n" +

@@ -7,6 +7,8 @@ namespace JoyfulWorks.UniFoundation.App
 {
     public class AppEntry : MonoBehaviour, IAppLifetimeInput
     {
+        [SerializeField] private ViewConfig viewConfig;
+        
         private App app;
 
         public event Action AppLostFocus;
@@ -24,7 +26,13 @@ namespace JoyfulWorks.UniFoundation.App
             // If App is not extended, or if there more than 1 type extending App, fall back to base App.
             Type appType = appTypes.Count == 1 ? appTypes[0] : typeof(App);
 
-            app = Activator.CreateInstance(appType, args: this) as App;
+            app = Activator.CreateInstance(appType, this, viewConfig) as App;
+            if (app == null)
+            {
+                throw new Exception("Could not instantiate app instance.");
+            }
+            
+            app.InputHub.RegisterInput(this);
 
             DontDestroyOnLoad(this);
         }

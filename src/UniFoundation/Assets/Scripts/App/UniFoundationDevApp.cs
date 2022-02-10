@@ -10,7 +10,7 @@ namespace JoyfulWorks.UniFoundationDev.App
         // For example;
         //public ISomeService SomeService { get; }
 
-        public UniFoundationDevApp(IAppLifetimeInput appLifetimeInput) : base(appLifetimeInput)
+        public UniFoundationDevApp(IAppLifetimeInput appLifetimeInput, ViewConfig viewConfig) : base(appLifetimeInput, viewConfig)
         {
             // Instantiate your own services here.
             // SomeService = new ConcreteSomeService();
