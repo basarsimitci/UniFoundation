@@ -12,7 +12,7 @@ namespace JoyfulWorks.UniFoundation.App
     {
         protected const string LogCategory = "App";
 
-        private readonly ViewConfig viewConfig;
+        internal ViewConfig ViewConfig;
 
         public static App Instance { get; private set; }
         
@@ -23,7 +23,7 @@ namespace JoyfulWorks.UniFoundation.App
         public App(IAppLifetimeInput appLifetimeInput, ViewConfig viewConfig)
         {
             Instance = this;
-            this.viewConfig = viewConfig;
+            ViewConfig = viewConfig;
 
             InitLogging();
             
@@ -63,9 +63,9 @@ namespace JoyfulWorks.UniFoundation.App
 
         public T GetViewConfig<T>() where T : class
         {
-            return viewConfig as T;
+            return ViewConfig as T;
         }
-        
+
         private void InitLogging()
         {
             Log.SetStackTraceLevels();

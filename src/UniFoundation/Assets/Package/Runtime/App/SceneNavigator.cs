@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using JoyfulWorks.UniFoundation.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,15 @@ namespace JoyfulWorks.UniFoundation.App
         public SceneNavigator()
         {
             sceneStack.Push(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public async UniTask LoadScene(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
+
+            await UniTask.DelayFrame(1);
+            
+            App.Instance.ViewConfig = UnityEngine.GameObject.FindObjectOfType<ViewConfig>();
         }
 
         public void GotoScene(int nextScene)
